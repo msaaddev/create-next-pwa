@@ -3,7 +3,7 @@ const execa = require('execa');
 const chalk = require('chalk');
 const pwa = require('./pwa');
 
-module.exports = async (name, flag) => {
+module.exports = async (name, flag, currentDir) => {
 	const spinner = ora();
 
 	if (flag.length === 0) {
@@ -18,7 +18,7 @@ module.exports = async (name, flag) => {
 		// succeed
 		spinner.succeed(`${chalk.green('Next.js App created.')}`);
 
-		await pwa(name);
+		await pwa(name, currentDir);
 	} catch (err) {
 		console.log(err);
 		spinner.fail(`Couldn't create an app.`);
