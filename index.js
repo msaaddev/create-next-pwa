@@ -18,6 +18,6 @@ const end = require('./utils/end');
 	const name = await init(flags);
 
 	// executes cli
-	await cli(name);
+	await cli(name, flags);
 	end();
 })();
