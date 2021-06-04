@@ -9,7 +9,9 @@
 
 // importing files & packages
 const init = require('./utils/init');
+const end = require('./utils/end');
 
 (() => {
 	init();
+	end();
 })();
