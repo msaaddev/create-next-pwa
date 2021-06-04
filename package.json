@@ -1,0 +1,25 @@
+{
+	"name": "create-next-pwa",
+	"version": "1.0.0",
+	"description": "Set up Next.js Progressive Web App with `npx create-next-pwa app-name`",
+	"repository": "https://github.com/msaaddev/create-next-pwa",
+	"author": {
+		"name": "Saad Irfan",
+		"email": "mrsaadirfan@gmail.com",
+		"url": "https://twitter.com/msaaddev"
+	},
+	"bin": {
+		"create-next-pwa": "index.js",
+		"cnpwa": "index.js"
+	},
+	"main": "index.js",
+	"license": "MIT",
+	"files": [
+		"utils/*",
+		"index.js"
+	],
+	"keywords": [],
+	"dependencies": {
+		"cli-welcome": "^2.2.2"
+	}
+}
