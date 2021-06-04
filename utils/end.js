@@ -13,5 +13,3 @@ module.exports = () => {
 	// display table
 	console.log(table.toString());
 };
-
-// get repo link and add it to the table
