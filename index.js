@@ -11,7 +11,7 @@
 const init = require('./utils/init');
 const end = require('./utils/end');
 
-(() => {
+(module.exports = () => {
 	init();
 	end();
 })();
