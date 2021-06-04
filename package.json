@@ -16,6 +16,8 @@
 	"license": "MIT",
 	"files": [
 		"utils/*",
+		"img/*",
+		"config/*",
 		"index.js"
 	],
 	"keywords": [],

@@ -16,8 +16,9 @@ const end = require('./utils/end');
 	let flags = [];
 	flags = [...process.argv.slice(2)];
 	const name = await init(flags);
+	const currentDir = __dirname;
 
 	// executes cli
-	await cli(name, flags);
+	await cli(name, flags, currentDir);
 	end();
 })();
