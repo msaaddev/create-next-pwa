@@ -20,7 +20,15 @@
 		"config/*",
 		"index.js"
 	],
-	"keywords": [],
+	"keywords": [
+		"nextjs",
+		"pwa",
+		"create-next-app",
+		"progressive web app",
+		"create-next-pwa",
+		"msaaddev",
+		"Saad Irfan"
+	],
 	"dependencies": {
 		"chalk": "^2.4.2",
 		"cli-table": "^0.3.6",
