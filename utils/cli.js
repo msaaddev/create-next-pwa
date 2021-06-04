@@ -2,6 +2,7 @@ const ora = require('ora');
 const execa = require('execa');
 const chalk = require('chalk');
 const pwa = require('./pwa');
+const handleError = require('node-cli-handle-error');
 
 module.exports = async (name, flag, currentDir) => {
 	const spinner = ora();
@@ -20,7 +21,7 @@ module.exports = async (name, flag, currentDir) => {
 
 		await pwa(name, currentDir);
 	} catch (err) {
-		console.log(err);
 		spinner.fail(`Couldn't create an app.`);
+		handleError(`Something went wrong.`, err);
 	}
 };
