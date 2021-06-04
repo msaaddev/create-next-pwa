@@ -6,9 +6,9 @@ module.exports = () => {
 	const table = new cliTable();
 	table.push([
 		' Star '.bgYellow.gray,
-		'https://github.com/msaaddev/create-next-pwa'
+		'https://github.com/msaaddev/create-next-pwa'.grey
 	]);
-	table.push([' Twitter '.bgCyan.gray, 'http://twitter.com/msaaddev']);
+	table.push([' Twitter '.bgCyan.gray, 'http://twitter.com/msaaddev'.grey]);
 
 	// display table
 	console.log(table.toString());

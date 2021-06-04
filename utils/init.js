@@ -1,5 +1,5 @@
 const welcome = require('cli-welcome');
-const pkgJSON = require('../package.json')
+const pkgJSON = require('../package.json');
 
 module.exports = () => {
 	welcome({
