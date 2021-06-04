@@ -11,7 +11,10 @@
 const init = require('./utils/init');
 const end = require('./utils/end');
 
-(module.exports = () => {
-	init();
+(module.exports = async () => {
+	let flags = [];
+	flags = [...process.argv.slice(2)];
+
+	const name = await init(flags);
 	end();
 })();

@@ -22,7 +22,8 @@
 	"dependencies": {
 		"cli-table": "^0.3.6",
 		"cli-welcome": "^2.2.2",
-		"colors": "^1.0.3"
+		"colors": "^1.0.3",
+		"enquirer": "^2.3.6"
 	},
 	"devDependencies": {
 		"prettier": "^2.3.0"
