@@ -23,5 +23,12 @@
 		"cli-table": "^0.3.6",
 		"cli-welcome": "^2.2.2",
 		"colors": "^1.0.3"
+	},
+	"devDependencies": {
+		"prettier": "^2.3.0"
+	},
+	"scripts": {
+		"format": "prettier --write \"./**/*.{js,json}\"",
+		"test": "node test.js"
 	}
 }
