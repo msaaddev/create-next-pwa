@@ -49,6 +49,10 @@ create-next-pwa
 
 ![usage without app name](assets/usage-2.gif)
 
+## 👨🏻‍💻 Contributing
+
+Make sure you read the [contributing guidelines](https://github.com/msaaddev/create-next-pwa/blob/master/contributing.md) before opening a PR.
+
 ## 🔑 License & Conduct
 
 - MIT © [Saad Irfan](https://github.com/msaaddev)
