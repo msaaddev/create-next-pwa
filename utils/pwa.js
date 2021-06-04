@@ -14,6 +14,9 @@ module.exports = async (name, currentDir) => {
 	const path = `${cwd}/${name}`;
 
 	try {
+		// deleting .git directory
+		await execa(`rm`, [`rf`, `${path}/.git`]);
+
 		// creating prettier configuration
 		spinner.start(`${chalk.bold.dim('Creating PWA configurations...')}`);
 		execa('touch', [`${path}/.prettierrc.json`]);
@@ -66,7 +69,8 @@ module.exports = async (name, currentDir) => {
 		);
 
 		console.log(`\n${chalk.dim('I suggest that you begin by typing: \n')}`);
-		console.log(chalk.cyan(`cd`), `name`);
+		console.log(chalk.cyan(`cd`), `${name}`);
+		console.log(chalk.cyan(`git`), `init`);
 		console.log(chalk.cyan(`npm run dev`));
 	} catch (error) {
 		spinner.fail(`Couldn't convert Next.js app to PWA.`);
