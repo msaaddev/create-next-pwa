@@ -14,5 +14,6 @@ module.exports = () => {
 	]);
 
 	// display table
+	console.log('');
 	console.log(table.toString());
 };
