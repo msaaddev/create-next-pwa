@@ -16,7 +16,7 @@ module.exports = async (name, flag) => {
 		await execa(`npx`, [`create-next-app`, `${name}`]);
 
 		// succeed
-		spinner.succeed(`${chalk.green('Next.js App Created')}`);
+		spinner.succeed(`${chalk.green('Next.js App created.')}`);
 
 		await pwa(name);
 	} catch (err) {
