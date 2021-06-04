@@ -7,6 +7,7 @@ const logSymbols = require('log-symbols');
 const manifest = require('../config/pwa-manifest.json');
 const pwaPrettier = require('../config/prettier.json');
 const packageJSON = require('../config/pwa-package.json');
+const handleError = require('node-cli-handle-error');
 
 module.exports = async (name, currentDir) => {
 	const spinner = ora();
@@ -65,5 +66,6 @@ module.exports = async (name, currentDir) => {
 		);
 	} catch (error) {
 		spinner.fail(`Couldn't convert Next.js app to PWA.`);
+		handleError(`Something went wrong.`, err);
 	}
 };

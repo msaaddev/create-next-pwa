@@ -30,6 +30,7 @@
 		"execa": "^5.1.0",
 		"jsonfile": "^6.1.0",
 		"log-symbols": "^4.1.0",
+		"node-cli-handle-error": "^1.0.0",
 		"ora": "^5.4.0"
 	},
 	"devDependencies": {
