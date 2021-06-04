@@ -60,10 +60,14 @@ module.exports = async (name, currentDir) => {
 
 		console.log('');
 		console.log(
-			logSymbols.success,
+			logSymbols.info,
 			chalk.bgGreen.bold(` Next.js PWA `).black,
 			'created successfully.'
 		);
+
+		console.log(`\n${chalk.dim('I suggest that you begin by typing: \n')}`);
+		console.log(chalk.cyan(`cd`), `name`);
+		console.log(chalk.cyan(`npm run dev`));
 	} catch (error) {
 		spinner.fail(`Couldn't convert Next.js app to PWA.`);
 		handleError(`Something went wrong.`, err);

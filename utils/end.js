@@ -9,7 +9,7 @@ module.exports = () => {
 		'https://github.com/msaaddev/create-next-pwa'.grey
 	]);
 	table.push([
-		' Twitter '.bgCyan.black.bold,
+		' Follow '.bgCyan.black.bold,
 		'http://twitter.com/msaaddev'.grey
 	]);
 
