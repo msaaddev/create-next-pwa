@@ -9,7 +9,8 @@ const { Input } = require('enquirer');
 const getInput = async () => {
 	const prompt = new Input({
 		name: 'question',
-		message: 'Your app name?'
+		message: 'Your app name?',
+		hint: 'kebab-case only'
 	});
 
 	let answer;
@@ -27,7 +28,7 @@ module.exports = async flags => {
 		title: `${pkgJSON.name}`,
 		tagLine: `by ${pkgJSON.author.name}`,
 		description: `${pkgJSON.description}`,
-		bgColor: `#ffffff`,
+		bgColor: `#4783d4`,
 		color: `#000000`,
 		bold: true,
 		clear: true,
