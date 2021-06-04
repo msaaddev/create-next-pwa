@@ -2,6 +2,7 @@ const ora = require('ora');
 const execa = require('execa');
 const cwd = process.cwd();
 const jsonFile = require('jsonfile');
+const chalk = require('chalk');
 const manifest = require('../pwa/pwa-manifest.json');
 const pwaPrettier = require('../pwa/prettier.json');
 const packageJSON = require('../pwa/pwa-package.json');
@@ -36,15 +37,10 @@ module.exports = async name => {
 	jsonFile.writeFile(`${path}/.prettierrc.json`, pwaPrettier, err => {});
 	jsonFile.writeFile(`${path}/package.json`, pwaPkgJSON, err => {});
 
-	// change directory
-	process.chdir(path);
-
 	// installing packages
-	execa(`npm`, [`install`, `-D`, `prettier`]);
-	execa(`npm`, [`install`, `--save`, `next-pwa`]);
-
-	execa(`npm`, [`run`, `format`]);
-
-	try {
-	} catch (err) {}
+	spinner.start(`${chalk.bold.dim('Installing dependencies...')}`);
+	await execa(`npm`, [`--prefix`, `${path}`, `install`]);
+	await execa(`npm`, [`--prefix`, `${path}`, `install`, `--only=dev`]);
+	await execa(`npm`, [`--prefix`, `${path}`, `run`, `format`]);
+	spinner.succeed(`${chalk.green('Dependencies installed.')}`);
 };
