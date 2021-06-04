@@ -5,10 +5,13 @@ module.exports = () => {
 	// create a table
 	const table = new cliTable();
 	table.push([
-		' Star '.bgYellow.gray.bold,
+		' Star '.bgYellow.black.bold,
 		'https://github.com/msaaddev/create-next-pwa'.grey
 	]);
-	table.push([' Twitter '.bgCyan.gray.bold, 'http://twitter.com/msaaddev'.grey]);
+	table.push([
+		' Twitter '.bgCyan.black.bold,
+		'http://twitter.com/msaaddev'.grey
+	]);
 
 	// display table
 	console.log(table.toString());
