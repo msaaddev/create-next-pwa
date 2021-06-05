@@ -2,7 +2,7 @@ const welcome = require('cli-welcome');
 const pkgJSON = require('../package.json');
 const { Input } = require('enquirer');
 const meow = require('meow');
-const cliHelpText = require('cli-meow-help');
+const meowHelp = require('cli-meow-help');
 
 /*
  *
