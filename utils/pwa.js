@@ -59,8 +59,13 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 		spinner.start(`${chalk.bold.dim('Installing dependencies...')}`);
 		await execa(`npm`, [`--prefix`, `${path}`, `install`]);
 
-		if(!isTailwind) {
-			await execa(`npm`, [`--prefix`, `${path}`, `install`, `--only=dev`]);
+		if (!isTailwind) {
+			await execa(`npm`, [
+				`--prefix`,
+				`${path}`,
+				`install`,
+				`--only=dev`
+			]);
 			await execa(`npm`, [`--prefix`, `${path}`, `run`, `format`]);
 		}
 		spinner.succeed(`${chalk.green('Dependencies installed.')}`);
