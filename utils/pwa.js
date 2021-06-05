@@ -3,13 +3,12 @@ const execa = require('execa');
 const jsonFile = require('jsonfile');
 const { getPath, pwaPath } = require('../functions/path');
 const chalk = require('chalk');
-const logSymbols = require('log-symbols');
 const manifest = require('../config/pwa/pwa-manifest.json');
 const pwaPrettier = require('../config/pwa/prettier.json');
 const packageJSON = require('../config/pwa/pwa-package.json');
 const handleError = require('node-cli-handle-error');
 
-module.exports = async (name, currentDir) => {
+module.exports = async (name, currentDir, isTailwind = false) => {
 	// get nextjs project path
 	const path = getPath(name);
 
@@ -59,21 +58,12 @@ module.exports = async (name, currentDir) => {
 		// installing packages
 		spinner.start(`${chalk.bold.dim('Installing dependencies...')}`);
 		await execa(`npm`, [`--prefix`, `${path}`, `install`]);
-		await execa(`npm`, [`--prefix`, `${path}`, `install`, `--only=dev`]);
-		await execa(`npm`, [`--prefix`, `${path}`, `run`, `format`]);
+
+		if(!isTailwind) {
+			await execa(`npm`, [`--prefix`, `${path}`, `install`, `--only=dev`]);
+			await execa(`npm`, [`--prefix`, `${path}`, `run`, `format`]);
+		}
 		spinner.succeed(`${chalk.green('Dependencies installed.')}`);
-
-		console.log('');
-		console.log(
-			logSymbols.info,
-			chalk.bgGreen.bold(` Next.js PWA `).black,
-			'created successfully.'
-		);
-
-		console.log(`\n${chalk.dim('I suggest that you begin by typing: \n')}`);
-		console.log(chalk.cyan(`cd`), `${name}`);
-		console.log(chalk.cyan(`git`), `init`);
-		console.log(chalk.cyan(`npm run dev`));
 	} catch (err) {
 		spinner.fail(`Couldn't convert Next.js app to PWA.`);
 		handleError(`Something went wrong.`, err);
