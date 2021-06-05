@@ -30,7 +30,29 @@ const pwaPath = (name, currentDir) => {
 	};
 };
 
+/**
+ *
+ * @param {name} - name of the directory
+ * @param {currentDir} - path of the directory from where CLI is running
+ */
+const tailwindPath = (name, currentDir) => {
+	const path = getPath(name);
+
+	return {
+		pkgJSON: `${path}/package.json`,
+		postCSSConfig: `${currentDir}/config/tailwind/postcss.config.js`,
+		tailwindConfig: `${currentDir}/config/tailwind/tailwind.config.js`,
+		appjsPath: `${path}/pages/_app.js`,
+		globalCSS: `${path}/styles/globals.css`,
+		writeAppJS: `${currentDir}/config/tailwind/_app.js`,
+		writeGlobalCSS: `${currentDir}/config/tailwind/globals.css`,
+		pagesDir: `${path}/pages`,
+		stylesDir: `${path}/styles`
+	};
+};
+
 module.exports = {
 	getPath,
-	pwaPath
+	pwaPath,
+	tailwindPath
 };
