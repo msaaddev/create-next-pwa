@@ -1,6 +1,8 @@
 const welcome = require('cli-welcome');
 const pkgJSON = require('../package.json');
 const { Input } = require('enquirer');
+const meow = require('meow');
+const cliHelpText = require('cli-meow-help');
 
 /*
  *
@@ -23,17 +25,43 @@ const getInput = async () => {
 	return answer;
 };
 
-module.exports = async flags => {
-	welcome({
-		title: `${pkgJSON.name}`,
-		tagLine: `by ${pkgJSON.author.name}`,
-		description: `${pkgJSON.description}`,
-		bgColor: `#4783d4`,
-		color: `#000000`,
-		bold: true,
-		clear: true,
-		version: `${pkgJSON.version}`
+/**
+ *
+ *	generates cli help text
+ */
+const cliHelpText = () => {
+	const commands = {
+		app_name: { desc: `Your Next.js Progessive Web App name` }
+	};
+
+	const flags = {
+		tailwind: {
+			desc: `Integrated tailwind in the PWA`,
+			default: 'false'
+		}
+	};
+
+	const helpText = meowHelp({
+		name: `${pkgJSON.name}`,
+		commands,
+		flags
 	});
+
+	meow(helpText, { flags });
+};
+
+module.exports = async flags => {
+	cliHelpText() ||
+		welcome({
+			title: `${pkgJSON.name}`,
+			tagLine: `by ${pkgJSON.author.name}`,
+			description: `${pkgJSON.description}`,
+			bgColor: `#4783d4`,
+			color: `#000000`,
+			bold: true,
+			clear: true,
+			version: `${pkgJSON.version}`
+		});
 
 	let question = '';
 
