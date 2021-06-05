@@ -1,37 +1,42 @@
 const ora = require('ora');
 const execa = require('execa');
-const cwd = process.cwd();
 const jsonFile = require('jsonfile');
+const { getPath, pwaPath } = require('../functions/path');
 const chalk = require('chalk');
-const logSymbols = require('log-symbols');
-const manifest = require('../config/pwa-manifest.json');
-const pwaPrettier = require('../config/prettier.json');
-const packageJSON = require('../config/pwa-package.json');
+const manifest = require('../config/pwa/pwa-manifest.json');
+const pwaPrettier = require('../config/pwa/prettier.json');
+const packageJSON = require('../config/pwa/pwa-package.json');
 const handleError = require('node-cli-handle-error');
 
-module.exports = async (name, currentDir) => {
+module.exports = async (name, currentDir, isTailwind = false) => {
+	// get nextjs project path
+	const path = getPath(name);
+
+	// pwa files path
+	const pwaPaths = pwaPath(name, currentDir);
+
+	// spinner
 	const spinner = ora();
-	const path = `${cwd}/${name}`;
 
 	try {
 		// deleting .git directory
-		await execa(`rm`, [`-rf`, `${path}/.git`]);
+		await execa(`rm`, [`-rf`, `${pwaPaths.gitDir}`]);
 
 		// creating prettier configuration
-		spinner.start(`${chalk.bold.dim('Creating PWA configurations...')}`);
-		execa('touch', [`${path}/.prettierrc.json`]);
+		spinner.start(`${chalk.bold.dim('Adding PWA configurations...')}`);
+		execa('touch', [`${pwaPaths.prettierFile}`]);
 
 		// copying logos
-		execa('cp', [`${currentDir}/img/logo-128x128.png`, `${path}/public`]);
-		execa('cp', [`${currentDir}/img/logo-512x512.png`, `${path}/public`]);
-		execa('cp', [`${currentDir}/config/_document.js`, `${path}/pages`]);
-		execa('cp', [`${currentDir}/config/next.config.js`, `${path}`]);
+		execa('cp', [`${pwaPaths.logo128x128}`, `${pwaPaths.publicDir}`]);
+		execa('cp', [`${pwaPaths.logo512x512}`, `${pwaPaths.publicDir}`]);
+		execa('cp', [`${pwaPaths.documentFile}`, `${pwaPaths.pagesDir}`]);
+		execa('cp', [`${pwaPaths.nextConfig}`, `${path}`]);
 
-		spinner.succeed(`${chalk.green('PWA configurations created.')}`);
+		spinner.succeed(`${chalk.green('PWA configurations added.')}`);
 
 		// creating manifest.json file
 		spinner.start(`${chalk.bold.dim('Creating manifest.json...')}`);
-		execa('touch', [`${path}/public/manifest.json`]);
+		execa('touch', [`${pwaPaths.manifestFile}`]);
 
 		// adding content to manifest.json
 		const pwaManifest = { ...manifest };
@@ -45,33 +50,20 @@ module.exports = async (name, currentDir) => {
 		pwaPkgJSON.name = name;
 
 		// writing data to files
-		jsonFile.writeFile(
-			`${path}/public/manifest.json`,
-			pwaManifest,
-			err => {}
-		);
-		jsonFile.writeFile(`${path}/.prettierrc.json`, pwaPrettier, err => {});
-		jsonFile.writeFile(`${path}/package.json`, pwaPkgJSON, err => {});
+		jsonFile.writeFile(`${pwaPaths.manifestFile}`, pwaManifest, err => {});
+		jsonFile.writeFile(`${pwaPaths.prettierFile}`, pwaPrettier, err => {});
+		jsonFile.writeFile(`${pwaPaths.writePkgJSON}`, pwaPkgJSON, err => {});
 		spinner.succeed(`${chalk.green('metadata files updated.')}`);
 
 		// installing packages
 		spinner.start(`${chalk.bold.dim('Installing dependencies...')}`);
 		await execa(`npm`, [`--prefix`, `${path}`, `install`]);
-		await execa(`npm`, [`--prefix`, `${path}`, `install`, `--only=dev`]);
-		await execa(`npm`, [`--prefix`, `${path}`, `run`, `format`]);
+
+		if(!isTailwind) {
+			await execa(`npm`, [`--prefix`, `${path}`, `install`, `--only=dev`]);
+			await execa(`npm`, [`--prefix`, `${path}`, `run`, `format`]);
+		}
 		spinner.succeed(`${chalk.green('Dependencies installed.')}`);
-
-		console.log('');
-		console.log(
-			logSymbols.info,
-			chalk.bgGreen.bold(` Next.js PWA `).black,
-			'created successfully.'
-		);
-
-		console.log(`\n${chalk.dim('I suggest that you begin by typing: \n')}`);
-		console.log(chalk.cyan(`cd`), `${name}`);
-		console.log(chalk.cyan(`git`), `init`);
-		console.log(chalk.cyan(`npm run dev`));
 	} catch (err) {
 		spinner.fail(`Couldn't convert Next.js app to PWA.`);
 		handleError(`Something went wrong.`, err);

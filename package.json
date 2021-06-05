@@ -18,6 +18,7 @@
 		"utils/*",
 		"img/*",
 		"config/*",
+		"functions/*",
 		"index.js"
 	],
 	"keywords": [
