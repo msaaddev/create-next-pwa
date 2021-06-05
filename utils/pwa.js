@@ -72,7 +72,7 @@ module.exports = async (name, currentDir) => {
 		console.log(chalk.cyan(`cd`), `${name}`);
 		console.log(chalk.cyan(`git`), `init`);
 		console.log(chalk.cyan(`npm run dev`));
-	} catch (error) {
+	} catch (err) {
 		spinner.fail(`Couldn't convert Next.js app to PWA.`);
 		handleError(`Something went wrong.`, err);
 	}
