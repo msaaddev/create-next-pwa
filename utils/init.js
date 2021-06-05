@@ -24,17 +24,16 @@ const getInput = async () => {
 };
 
 module.exports = async flags => {
-	cliHelpText() ||
-		welcome({
-			title: `${pkgJSON.name}`,
-			tagLine: `by ${pkgJSON.author.name}`,
-			description: `${pkgJSON.description}`,
-			bgColor: `#4783d4`,
-			color: `#000000`,
-			bold: true,
-			clear: true,
-			version: `${pkgJSON.version}`
-		});
+	welcome({
+		title: `${pkgJSON.name}`,
+		tagLine: `by ${pkgJSON.author.name}`,
+		description: `${pkgJSON.description}`,
+		bgColor: `#4783d4`,
+		color: `#000000`,
+		bold: true,
+		clear: true,
+		version: `${pkgJSON.version}`
+	});
 
 	let question = '';
 
