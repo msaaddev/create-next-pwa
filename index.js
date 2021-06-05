@@ -18,7 +18,12 @@ const end = require('./utils/end');
 	const name = await init(flags);
 	const currentDir = __dirname;
 
-	// executes cli
-	await cli(name, flags, currentDir);
-	end();
+	// add tailwind configurations
+	if (flags.indexOf('--tailwind') !== -1 || flags.indexOf('-t') !== -1) {
+		await cli(name, flags, currentDir, true);
+		end(name, true);
+	} else {
+		await cli(name, flags, currentDir);
+		end(name);
+	}
 })();
