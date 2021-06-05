@@ -65,7 +65,7 @@ npx create-next-pwa [app_name]
 ![usage with npx](assets/usage-3.gif)
 
 ```sh
-# interate tailwind in the Next.js PWA
+# integrate tailwind in the Next.js PWA
 npx create-next-pwa [app_name] --tailwind
 ```
 
