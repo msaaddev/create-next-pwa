@@ -15,7 +15,7 @@ module.exports = async (name, currentDir) => {
 
 	try {
 		// deleting .git directory
-		await execa(`rm`, [`rf`, `${path}/.git`]);
+		await execa(`rm`, [`-rf`, `${path}/.git`]);
 
 		// creating prettier configuration
 		spinner.start(`${chalk.bold.dim('Creating PWA configurations...')}`);
