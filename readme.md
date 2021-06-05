@@ -11,8 +11,9 @@
 
 ## 🎯 Features
 
-- Generates boilerplate code for Next.js PWA with a single command
-- Integrated prettier to easily format the code with `npm run format`
+- Generates boilerplate code for **Next.js PWA** with a single command
+- **Tailwind** integration with the Next.js PWA
+- Integrated **Prettier** to easily format the code with `npm run format`
 
 ## 📦 Installation
 
@@ -30,10 +31,45 @@ Navigate to the folder you want to have your Next.js PWA.
 
 ```sh
 # using npx
+npx create-next-pwa@latest [app_name]
+
+# if you have installed globally
+create-next-pwa [app_name]
+
+# Next.js PWA with tailwind integration using npx
+npx create-next-pwa@latest [app_name] --tailwind
+
+# Next.js PWA with tailwind integration if you have globally installed the CLI
+create-next-pwa [app_name] --tailwind
+
+# without giving app name in terminal using npx
+npx create-next-pwa@latest
+
+# without giving app name in terminal using npx and tailwind integration
+npx create-next-pwa@latest --tailwind
+
+# without giving app name in terminal if installed globally
+create-next-pwa
+
+# without giving app name in terminal if install globally along with tailwind integration
+create-next-pwa --tailwind
+```
+
+## 🎩 Demo
+
+```sh
+# using npx
 npx create-next-pwa [app_name]
 ```
 
 ![usage with npx](assets/usage-3.gif)
+
+```sh
+# interate tailwind in the Next.js PWA
+npx create-next-pwa [app_name] --tailwind
+```
+
+![integration of tailwind](assets/usage-4.gif)
 
 ```sh
 # if you have installed globally
