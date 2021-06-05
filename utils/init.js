@@ -1,8 +1,6 @@
 const welcome = require('cli-welcome');
 const pkgJSON = require('../package.json');
 const { Input } = require('enquirer');
-const meow = require('meow');
-const meowHelp = require('cli-meow-help');
 
 /*
  *
@@ -23,31 +21,6 @@ const getInput = async () => {
 		console.error(error);
 	}
 	return answer;
-};
-
-/**
- *
- *	generates cli help text
- */
-const cliHelpText = () => {
-	const commands = {
-		app_name: { desc: `Your Next.js Progessive Web App name` }
-	};
-
-	const flags = {
-		tailwind: {
-			desc: `Integrated tailwind in the PWA`,
-			default: 'false'
-		}
-	};
-
-	const helpText = meowHelp({
-		name: `${pkgJSON.name}`,
-		commands,
-		flags
-	});
-
-	meow(helpText, { flags });
 };
 
 module.exports = async flags => {

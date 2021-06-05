@@ -32,7 +32,6 @@
 	],
 	"dependencies": {
 		"chalk": "^2.4.2",
-		"cli-meow-help": "^2.0.2",
 		"cli-table": "^0.3.6",
 		"cli-welcome": "^2.2.2",
 		"colors": "^1.0.3",
@@ -40,7 +39,6 @@
 		"execa": "^5.1.0",
 		"jsonfile": "^6.1.0",
 		"log-symbols": "^4.1.0",
-		"meow": "^10.0.0",
 		"node-cli-handle-error": "^1.0.0",
 		"ora": "^5.4.0"
 	},
