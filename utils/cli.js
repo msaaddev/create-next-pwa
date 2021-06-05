@@ -5,7 +5,7 @@ const pwa = require('./pwa');
 const tailwindIntegration = require('./tailwind-integration');
 const handleError = require('node-cli-handle-error');
 
-module.exports = async (name, flags, currentDir) => {
+module.exports = async (name, flags, currentDir, isTailwind = false) => {
 	const spinner = ora();
 
 	if (flags.length === 0) {
@@ -20,11 +20,9 @@ module.exports = async (name, flags, currentDir) => {
 		// succeed
 		spinner.succeed(`${chalk.green('Next.js App created.')}`);
 
-		await pwa(name, currentDir);
+		await pwa(name, currentDir, isTailwind);
 
-		if (flags.indexOf('--tailwind') !== -1 || flags.indexOf('-t') !== -1) {
-			await tailwindIntegration(name, currentDir);
-		}
+		isTailwind && (await tailwindIntegration(name, currentDir));
 	} catch (err) {
 		spinner.fail(`Couldn't create an app.`);
 		handleError(`Something went wrong.`, err);
