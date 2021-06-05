@@ -9,14 +9,14 @@ module.exports = (name, isTailwind = false) => {
 	if (!isTailwind) {
 		console.log(
 			logSymbols.info,
-			chalk.bgGreen.bold(` Next.js PWA `).black,
-			'created successfully.'
+			chalk.bgGreen.hex(`#000000`).bold(` Next.js PWA `),
+			'created successfully'
 		);
 	} else {
 		console.log(
 			logSymbols.info,
-			chalk.bgGreen.bold(` Next.js PWA `).black,
-			`with ${chalk.bgGreen.bold(` Tailwind `).black}`,
+			chalk.bgGreen.hex(`#000000`).bold(` Next.js PWA `),
+			`with ${chalk.bgGreen.hex(`#000000`).bold(` Tailwind `)}`,
 			'created successfully'
 		);
 	}
@@ -29,11 +29,12 @@ module.exports = (name, isTailwind = false) => {
 	// create a table
 	const table = new cliTable();
 	table.push([
-		' Star '.bgYellow.black.bold,
+		// ' Star '.bold.bgYellow.black,
+		`${chalk.bgYellow.hex(`#000000`).bold(` Star `)}`,
 		'https://github.com/msaaddev/create-next-pwa'.grey
 	]);
 	table.push([
-		' Follow '.bgCyan.black.bold,
+		`${chalk.bgCyan.hex(`#000000`).bold(` Follow `)}`,
 		'http://twitter.com/msaaddev'.grey
 	]);
 
