@@ -4,9 +4,9 @@ const cwd = process.cwd();
 const jsonFile = require('jsonfile');
 const chalk = require('chalk');
 const logSymbols = require('log-symbols');
-const manifest = require('../config/pwa-manifest.json');
-const pwaPrettier = require('../config/prettier.json');
-const packageJSON = require('../config/pwa-package.json');
+const manifest = require('../config/pwa/pwa-manifest.json');
+const pwaPrettier = require('../config/pwa/prettier.json');
+const packageJSON = require('../config/pwa/pwa-package.json');
 const handleError = require('node-cli-handle-error');
 
 module.exports = async (name, currentDir) => {
@@ -24,8 +24,8 @@ module.exports = async (name, currentDir) => {
 		// copying logos
 		execa('cp', [`${currentDir}/img/logo-128x128.png`, `${path}/public`]);
 		execa('cp', [`${currentDir}/img/logo-512x512.png`, `${path}/public`]);
-		execa('cp', [`${currentDir}/config/_document.js`, `${path}/pages`]);
-		execa('cp', [`${currentDir}/config/next.config.js`, `${path}`]);
+		execa('cp', [`${currentDir}/config/pwa/_document.js`, `${path}/pages`]);
+		execa('cp', [`${currentDir}/config/pwa/next.config.js`, `${path}`]);
 
 		spinner.succeed(`${chalk.green('PWA configurations created.')}`);
 
