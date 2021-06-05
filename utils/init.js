@@ -35,15 +35,24 @@ module.exports = async flags => {
 		version: `${pkgJSON.version}`
 	});
 
-	let question = '';
+	let name = '';
 
-	if (flags.length === 0) {
-		while (question === '') {
-			question = await getInput(); // Make sure user enters a question that's not an empty string
+	let terminalInput = false;
+
+	for (let i = 0; i < flags.length; i++) {
+		let tempName = flags[i];
+
+		if (tempName[0] !== '-' && tempName[1] !== '-') {
+			name = tempName;
+			terminalInput = true;
 		}
-	} else {
-		question = flags[0];
 	}
 
-	return question;
+	if (!terminalInput) {
+		while (name === '') {
+			name = await getInput();
+		}
+	}
+
+	return name;
 };
