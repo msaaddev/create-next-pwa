@@ -23,7 +23,7 @@ module.exports = async (name, flags, currentDir) => {
 		await pwa(name, currentDir);
 
 		if (flags.indexOf('--tailwind') !== -1 || flags.indexOf('-t') !== -1) {
-			await tailwindIntegration();
+			await tailwindIntegration(name, currentDir);
 		}
 	} catch (err) {
 		spinner.fail(`Couldn't create an app.`);
