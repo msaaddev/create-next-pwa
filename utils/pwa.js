@@ -15,12 +15,19 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 	// pwa files path
 	const pwaPaths = pwaPath(name, currentDir);
 
+	// check whether the OS is windows or not
+	const isWindows = process.platform === 'win32' ? true : false;
+
 	// spinner
 	const spinner = ora();
 
 	try {
 		// deleting .git directory
-		await execa(`rm`, [`-rf`, `${pwaPaths.gitDir}`]);
+		if (!isWindows) {
+			await execa(`rm`, [`-rf`, `${pwaPaths.gitDir}`]);
+		} else {
+			await execa(`rmdir`, [`/Q`, `/S`, `${pwaPaths.gitDir}`]);
+		}
 
 		// creating prettier configuration
 		spinner.start(`${chalk.bold.dim('Adding PWA configurations...')}`);

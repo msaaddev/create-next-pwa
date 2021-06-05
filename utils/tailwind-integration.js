@@ -11,6 +11,9 @@ module.exports = async (name, currentDir) => {
 	const path = getPath(name);
 	const tailwindPaths = tailwindPath(name, currentDir);
 
+	// check whether the OS is windows or not
+	const isWindows = process.platform === 'win32' ? true : false;
+
 	// spinner
 	const spinner = ora();
 
@@ -27,8 +30,13 @@ module.exports = async (name, currentDir) => {
 		execa('cp', [`${tailwindPaths.tailwindConfig}`, `${path}`]);
 
 		// removing existing files
-		await execa(`rm`, [`-rf`, `${tailwindPaths.appjsPath}`]);
-		await execa(`rm`, [`-rf`, `${tailwindPaths.globalCSS}`]);
+		if (!isWindows) {
+			await execa(`rm`, [`-rf`, `${tailwindPaths.appjsPath}`]);
+			await execa(`rm`, [`-rf`, `${tailwindPaths.globalCSS}`]);
+		} else {
+			await execa(`rmdir`, [`/Q`, `/S`, `${tailwindPaths.appjsPath}`]);
+			await execa(`rmdir`, [`/Q`, `/S`, `${tailwindPaths.globalCSS}`]);
+		}
 
 		execa('cp', [`${tailwindPaths.writeAppJS}`, `${path}/pages`]);
 		execa('cp', [`${tailwindPaths.writeGlobalCSS}`, `${path}/styles`]);
