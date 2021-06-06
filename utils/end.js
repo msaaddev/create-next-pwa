@@ -2,8 +2,36 @@ const cliTable = require('cli-table');
 const colors = require('colors');
 const chalk = require('chalk');
 const logSymbols = require('log-symbols');
+const checkForUpdate = require('update-check');
+const pkgJSON = require('../package.json');
 
-module.exports = (name, isTailwind = false) => {
+/**
+ *
+ * checks whether an update is available for the CLI
+ */
+const notifyUpdate = async () => {
+	let update = null;
+
+	try {
+		update = await checkForUpdate(pkgJSON);
+	} catch (err) {}
+
+	if (update) {
+		console.log();
+		console.log(
+			chalk.yellow.bold(
+				'A new version of `create-next-pwa` is available!'
+			)
+		);
+		console.log(
+			'You can update by running: ' +
+				chalk.cyan('npm i -g create-next-pwa')
+		);
+		console.log();
+	}
+};
+
+module.exports = async (name, isTailwind = false) => {
 	console.log('');
 
 	if (!isTailwind) {
@@ -41,4 +69,6 @@ module.exports = (name, isTailwind = false) => {
 	// display table
 	console.log('');
 	console.log(table.toString());
+
+	await notifyUpdate();
 };

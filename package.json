@@ -41,7 +41,8 @@
 		"jsonfile": "^6.1.0",
 		"log-symbols": "^4.1.0",
 		"node-cli-handle-error": "^1.0.0",
-		"ora": "^5.4.0"
+		"ora": "^5.4.0",
+		"update-check": "^1.5.4"
 	},
 	"devDependencies": {
 		"prettier": "^2.3.0"
