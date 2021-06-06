@@ -40,18 +40,27 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 
 		// creating prettier configuration
 		spinner.start(`${chalk.bold.dim('Adding PWA configurations...')}`);
-		execa('touch', [`${pwaPaths.prettierFile}`]);
 
 		if (!isWindows) {
+			// creating prettuerrc.json file
+			execa('touch', [`${pwaPaths.prettierFile}`]);
+
 			// copying logos
 			execa('cp', [`${pwaPaths.logo128x128}`, `${pwaPaths.publicDir}`]);
 			execa('cp', [`${pwaPaths.logo512x512}`, `${pwaPaths.publicDir}`]);
+
+			// coping config files
 			execa('cp', [`${pwaPaths.documentFile}`, `${pwaPaths.pagesDir}`]);
 			execa('cp', [`${pwaPaths.nextConfig}`, `${path}`]);
 		} else {
+			// creating prettuerrc.json file
+			execa('copy', [`NUL`, `${pwaPaths.prettierFile}`]);
+
 			// copying logos
 			execa('copy', [`${pwaPaths.logo128x128}`, `${pwaPaths.publicDir}`]);
 			execa('copy', [`${pwaPaths.logo512x512}`, `${pwaPaths.publicDir}`]);
+
+			// coping config files
 			execa('copy', [`${pwaPaths.documentFile}`, `${pwaPaths.pagesDir}`]);
 			execa('copy', [`${pwaPaths.nextConfig}`, `${path}`]);
 		}
@@ -60,7 +69,12 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 
 		// creating manifest.json file
 		spinner.start(`${chalk.bold.dim('Creating manifest.json...')}`);
-		execa('touch', [`${pwaPaths.manifestFile}`]);
+
+		if (!isWindows) {
+			execa('touch', [`${pwaPaths.manifestFile}`]);
+		} else {
+			execa('copy', [`NUL`, `${pwaPaths.manifestFile}`]);
+		}
 
 		// adding content to manifest.json
 		const pwaManifest = { ...manifest };
