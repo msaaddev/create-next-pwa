@@ -8,7 +8,7 @@ const pwaPrettier = require('../config/pwa/prettier.json');
 const packageJSON = require('../config/pwa/pwa-package.json');
 const handleError = require('node-cli-handle-error');
 const fs = require('fs');
-const changeDir = require('in-folder');
+const execAsync = require('../functions/exec-async');
 
 module.exports = async (name, currentDir, isTailwind = false) => {
 	// get nextjs project path
@@ -148,12 +148,19 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 			}
 		} else {
 			// change directory
-			changeDir(name, () => process.cwd());
+			try {
+				const instDependencies = `npm install`;
+				await execAsync(name, instDependencies);
 
-			execa(`npm`, [`install`]);
-			if (!isTailwind) {
-				execa(`npm`, [`install`, `--only=dev`]);
-				execa(`npm`, [`run`, `format`]);
+				if (!isTailwind) {
+					const instDevDependencies = `npm install --only=dev`;
+					const formatCode = `npm run format`;
+
+					await execAsync(name, instDevDependencies);
+					await execAsync(name, formatCode);
+				}
+			} catch (error) {
+				handleError(error);
 			}
 		}
 
