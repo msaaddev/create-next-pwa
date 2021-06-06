@@ -103,31 +103,43 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 					console.log(err);
 				}
 			});
-			jsonFile.writeFile(
-				`${pwaPaths.prettierFile}`,
-				pwaPrettier,
-				err => {}
-			);
-			jsonFile.writeFile(
-				`${pwaPaths.writePkgJSON}`,
-				pwaPkgJSON,
-				err => {}
-			);
+			jsonFile.writeFile(`${pwaPaths.prettierFile}`, pwaPrettier, err => {
+				if (err !== null) {
+					console.log(err);
+				}
+			});
+			jsonFile.writeFile(`${pwaPaths.writePkgJSON}`, pwaPkgJSON, err => {
+				if (err !== null) {
+					console.log(err);
+				}
+			});
 		} else {
 			jsonFile.writeFile(
 				`${pwaPaths.winManifestFile}`,
 				pwaManifest,
-				err => {}
+				err => {
+					if (err !== null) {
+						console.log(err);
+					}
+				}
 			);
 			jsonFile.writeFile(
 				`${pwaPaths.winPrettierFile}`,
 				pwaPrettier,
-				err => {}
+				err => {
+					if (err !== null) {
+						console.log(err);
+					}
+				}
 			);
 			jsonFile.writeFile(
 				`${pwaPaths.winWritePkgJSON}`,
 				pwaPkgJSON,
-				err => {}
+				err => {
+					if (err !== null) {
+						console.log(err);
+					}
+				}
 			);
 		}
 		spinner.succeed(`${chalk.green('metadata files updated.')}`);
