@@ -74,7 +74,7 @@ const tailwindPath = (name, currentDir) => {
 		pagesDir: `${path}/pages`,
 		winPagesDir: `${path}${slash}pages`,
 		stylesDir: `${path}/styles`,
-		winStylesDir: `${path}${slash} styles`
+		winStylesDir: `${path}${slash}styles`
 	};
 };
 
