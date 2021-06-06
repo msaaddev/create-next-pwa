@@ -21,7 +21,7 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 	const isWindows = process.platform === 'win32' ? true : false;
 
 	// check if directory exists
-	const filenames = fs.readdirSync(process.cwd());
+	const filenames = fs.readdirSync(path);
 	const isGitDir = filenames.indexOf(`.git`) !== -1 ? true : false;
 
 	// spinner
