@@ -5,7 +5,7 @@ const { getPath, tailwindPath } = require('../functions/path');
 const chalk = require('chalk');
 const handleError = require('node-cli-handle-error');
 const packageJSON = require('../config/tailwind/tailwind-package.json');
-const changeDir = require('in-folder');
+const execAsync = require('../functions/exec-async');
 
 module.exports = async (name, currentDir) => {
 	// get nextjs project path
@@ -77,11 +77,15 @@ module.exports = async (name, currentDir) => {
 			]);
 			await execa(`npm`, [`--prefix`, `${path}`, `run`, `format`]);
 		} else {
-			// change directory
-			changeDir(name, () => process.cwd());
+			try {
+				const instDevDependencies = `npm install --only=dev`;
+				const formatCode = `npm run format`;
 
-			execa(`npm`, [`install`, `--only=dev`]);
-			execa(`npm`, [`run`, `format`]);
+				await execAsync(name, instDevDependencies);
+				await execAsync(name, formatCode);
+			} catch (err) {
+				handleError(err);
+			}
 		}
 
 		// succeed
