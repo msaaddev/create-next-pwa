@@ -99,7 +99,9 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 		// writing data to files
 		if (!isWindows) {
 			jsonFile.writeFile(`${pwaPaths.manifestFile}`, pwaManifest, err => {
-				err ? console.log(err) : null;
+				if (err !== null) {
+					console.log(err);
+				}
 			});
 			jsonFile.writeFile(
 				`${pwaPaths.prettierFile}`,
