@@ -95,9 +95,9 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 
 		// installing packages
 		spinner.start(`${chalk.bold.dim('Installing dependencies...')}`);
-		await execa(`npm`, [`--prefix`, `${path}`, `install`]);
 
 		if (!isWindows) {
+			await execa(`npm`, [`--prefix`, `${path}`, `install`]);
 			if (!isTailwind) {
 				await execa(`npm`, [
 					`--prefix`,
@@ -108,8 +108,9 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 				await execa(`npm`, [`--prefix`, `${path}`, `run`, `format`]);
 			}
 		} else {
+			process.chdir(path);
+			exec(`npm install`);
 			if (!isTailwind) {
-				process.chdir(path);
 				exec(`npm install --only=dev && npm run format`);
 			}
 		}
