@@ -114,16 +114,14 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 				}
 			});
 		} else {
-			console.log(pwaManifest);
-			jsonFile.writeFile(
-				`${pwaPaths.winManifestFile}`,
-				pwaManifest,
-				err => {
+			jsonFile
+				.writeFile(`${pwaPaths.winManifestFile}`, pwaManifest)
+				.then(res => {})
+				.catch(err => {
 					if (err !== null) {
 						console.log(err);
 					}
-				}
-			);
+				});
 			jsonFile.writeFile(
 				`${pwaPaths.winPrettierFile}`,
 				pwaPrettier,
