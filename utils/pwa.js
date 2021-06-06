@@ -8,6 +8,7 @@ const pwaPrettier = require('../config/pwa/prettier.json');
 const packageJSON = require('../config/pwa/pwa-package.json');
 const handleError = require('node-cli-handle-error');
 const fs = require('fs');
+const fsExtra = require('fs-extra');
 const execAsync = require('../functions/exec-async');
 
 module.exports = async (name, currentDir, isTailwind = false) => {
@@ -114,14 +115,15 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 				}
 			});
 		} else {
-			jsonFile
-				.writeFile(`${pwaPaths.winManifestFile}`, pwaManifest)
-				.then(res => {})
+			fsExtra
+				.writeJson(`${pwaPaths.winManifestFile}`, pwaManifest)
+				.then(() => {})
 				.catch(err => {
 					if (err !== null) {
 						console.log(err);
 					}
 				});
+
 			jsonFile.writeFile(
 				`${pwaPaths.winPrettierFile}`,
 				pwaPrettier,
