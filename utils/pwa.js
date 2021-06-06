@@ -34,7 +34,7 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 			if (!isWindows) {
 				await execa(`rm`, [`-rf`, `${pwaPaths.gitDir}`]);
 			} else {
-				await execa(`rmdir`, [`/Q`, `/S`, `${pwaPaths.gitDir}`]);
+				await execa(`rmdir`, [`/Q`, `/S`, `${pwaPaths.winGitDir}`]);
 			}
 		}
 
@@ -57,12 +57,21 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 			execa('copy', [`NUL`, `${pwaPaths.prettierFile}`]);
 
 			// copying logos
-			execa('copy', [`${pwaPaths.logo128x128}`, `${pwaPaths.publicDir}`]);
-			execa('copy', [`${pwaPaths.logo512x512}`, `${pwaPaths.publicDir}`]);
+			execa('copy', [
+				`${pwaPaths.winLogo128x128}`,
+				`${pwaPaths.winPublicDir}`
+			]);
+			execa('copy', [
+				`${pwaPaths.winLogo512x512}`,
+				`${pwaPaths.winPublicDir}`
+			]);
 
 			// coping config files
-			execa('copy', [`${pwaPaths.documentFile}`, `${pwaPaths.pagesDir}`]);
-			execa('copy', [`${pwaPaths.nextConfig}`, `${path}`]);
+			execa('copy', [
+				`${pwaPaths.winDocumentFile}`,
+				`${pwaPaths.winPagesDir}`
+			]);
+			execa('copy', [`${pwaPaths.winNextConfig}`, `${path}`]);
 		}
 
 		spinner.succeed(`${chalk.green('PWA configurations added.')}`);
@@ -73,7 +82,7 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 		if (!isWindows) {
 			execa('touch', [`${pwaPaths.manifestFile}`]);
 		} else {
-			execa('copy', [`NUL`, `${pwaPaths.manifestFile}`]);
+			execa('copy', [`NUL`, `${pwaPaths.winManifestFile}`]);
 		}
 
 		// adding content to manifest.json
@@ -88,9 +97,39 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 		pwaPkgJSON.name = name;
 
 		// writing data to files
-		jsonFile.writeFile(`${pwaPaths.manifestFile}`, pwaManifest, err => {});
-		jsonFile.writeFile(`${pwaPaths.prettierFile}`, pwaPrettier, err => {});
-		jsonFile.writeFile(`${pwaPaths.writePkgJSON}`, pwaPkgJSON, err => {});
+		if (!isWindows) {
+			jsonFile.writeFile(
+				`${pwaPaths.manifestFile}`,
+				pwaManifest,
+				err => {}
+			);
+			jsonFile.writeFile(
+				`${pwaPaths.prettierFile}`,
+				pwaPrettier,
+				err => {}
+			);
+			jsonFile.writeFile(
+				`${pwaPaths.writePkgJSON}`,
+				pwaPkgJSON,
+				err => {}
+			);
+		} else {
+			jsonFile.writeFile(
+				`${pwaPaths.winManifestFile}`,
+				pwaManifest,
+				err => {}
+			);
+			jsonFile.writeFile(
+				`${pwaPaths.winPrettierFile}`,
+				pwaPrettier,
+				err => {}
+			);
+			jsonFile.writeFile(
+				`${pwaPaths.winWritePkgJSON}`,
+				pwaPkgJSON,
+				err => {}
+			);
+		}
 		spinner.succeed(`${chalk.green('metadata files updated.')}`);
 
 		// installing packages
