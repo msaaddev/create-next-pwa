@@ -114,6 +114,7 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 				}
 			});
 		} else {
+			console.log(pwaManifest);
 			jsonFile.writeFile(
 				`${pwaPaths.winManifestFile}`,
 				pwaManifest,
