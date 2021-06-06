@@ -1,4 +1,4 @@
-![cover image](assets/cover.jpg)
+<img src="assets/cover.jpg" alt="cover">
 <div align="center">
 	<h1>⚡️ create-next-pwa</h1>
 	<img src="https://img.shields.io/npm/v/create-next-pwa?color=%23000000" alt="version">
@@ -62,28 +62,28 @@ create-next-pwa --tailwind
 npx create-next-pwa [app_name]
 ```
 
-![usage with npx](assets/usage-3.gif)
+<img src="assets/usage-3.gif" alt="with npx">
 
 ```sh
 # integrate tailwind in the Next.js PWA
 npx create-next-pwa [app_name] --tailwind
 ```
 
-![integration of tailwind](assets/usage-4.gif)
+<img src="assets/usage-4.gif" alt="integration of tailwind">
 
 ```sh
 # if you have installed globally
 create-next-pwa [app_name]
 ```
 
-![usage with app name](assets/usage-1.gif)
+<img src="assets/usage-1.gif" alt="usage with app name">
 
 ```sh
 # you can also just use the create-next-pwa command
 create-next-pwa
 ```
 
-![usage without app name](assets/usage-2.gif)
+<img src="assets/usage-2.gif" alt="usage without app name">
 
 ## 👨🏻‍💻 Contributing
 
