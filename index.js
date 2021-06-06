@@ -24,6 +24,6 @@ const end = require('./utils/end');
 		end(name, true);
 	} else {
 		await cli(name, flags, currentDir);
-		end(name);
+		await end(name);
 	}
 })();
