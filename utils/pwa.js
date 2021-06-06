@@ -1,5 +1,6 @@
 const ora = require('ora');
 const execa = require('execa');
+const { exec } = require('child_process');
 const jsonFile = require('jsonfile');
 const { getPath, pwaPath } = require('../functions/path');
 const chalk = require('chalk');
@@ -82,15 +83,23 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 		spinner.start(`${chalk.bold.dim('Installing dependencies...')}`);
 		await execa(`npm`, [`--prefix`, `${path}`, `install`]);
 
-		if (!isTailwind) {
-			await execa(`npm`, [
-				`--prefix`,
-				`${path}`,
-				`install`,
-				`--only=dev`
-			]);
-			await execa(`npm`, [`--prefix`, `${path}`, `run`, `format`]);
+		if (!isWindows) {
+			if (!isTailwind) {
+				await execa(`npm`, [
+					`--prefix`,
+					`${path}`,
+					`install`,
+					`--only=dev`
+				]);
+				await execa(`npm`, [`--prefix`, `${path}`, `run`, `format`]);
+			}
+		} else {
+			if (!isTailwind) {
+				process.chdir(path);
+				exec(`npm install --only=dev && npm run format`);
+			}
 		}
+
 		spinner.succeed(`${chalk.green('Dependencies installed.')}`);
 	} catch (err) {
 		spinner.fail(`Couldn't convert Next.js app to PWA.`);
