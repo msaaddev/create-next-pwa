@@ -39,30 +39,43 @@ module.exports = async (name, currentDir) => {
 			await execa(`rm`, [`-rf`, `${tailwindPaths.appjsPath}`]);
 			await execa(`rm`, [`-rf`, `${tailwindPaths.globalCSS}`]);
 
-			execa('cp', [`${tailwindPaths.writeAppJS}`, `${path}/pages`]);
-			execa('cp', [`${tailwindPaths.writeGlobalCSS}`, `${path}/styles`]);
+			execa('cp', [
+				`${tailwindPaths.writeAppJS}`,
+				`${tailwindPaths.pagesDir}`
+			]);
+			execa('cp', [
+				`${tailwindPaths.writeGlobalCSS}`,
+				`${tailwindPaths.stylesDir}`
+			]);
 		} else {
 			// copying tailwind config files
-			execa('copy', [`${tailwindPaths.postCSSConfig}`, `${path}`]);
-			execa('copy', [`${tailwindPaths.tailwindConfig}`, `${path}`]);
+			execa('copy', [`${tailwindPaths.winPostCSSConfig}`, `${path}`]);
+			execa('copy', [`${tailwindPaths.winTailwindConfig}`, `${path}`]);
 
 			// removing existing files
-			await execa(`del`, [`${tailwindPaths.appjsPath}`]);
-			await execa(`del`, [`${tailwindPaths.globalCSS}`]);
+			await execa(`del`, [`${tailwindPaths.winAppjsPath}`]);
+			await execa(`del`, [`${tailwindPaths.winGlobalCSS}`]);
 
 			// copying _app.js and global css
-			execa('copy', [`${tailwindPaths.writeAppJS}`, `${path}/pages`]);
 			execa('copy', [
-				`${tailwindPaths.writeGlobalCSS}`,
-				`${path}/styles`
+				`${tailwindPaths.winWriteAppJS}`,
+				`${tailwindPaths.winPagesDir}`
+			]);
+			execa('copy', [
+				`${tailwindPaths.winWriteGlobalCSS}`,
+				`${tailwindPaths.winStylesDir}`
 			]);
 		}
 
 		// installing dev dependencies
-		if(!isWindows) {
-			await execa(`npm`, [`--prefix`, `${path}`, `install`, `--only=dev`]);
+		if (!isWindows) {
+			await execa(`npm`, [
+				`--prefix`,
+				`${path}`,
+				`install`,
+				`--only=dev`
+			]);
 			await execa(`npm`, [`--prefix`, `${path}`, `run`, `format`]);
-
 		} else {
 			process.chdir(path);
 			exec(`npm install --only=dev && npm run format`);
