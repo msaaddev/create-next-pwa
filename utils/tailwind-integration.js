@@ -1,6 +1,6 @@
 const ora = require('ora');
 const execa = require('execa');
-const jsonFile = require('jsonfile');
+const writeJsonFile = require('write-json-file');
 const { getPath, tailwindPath } = require('../functions/path');
 const chalk = require('chalk');
 const handleError = require('node-cli-handle-error');
@@ -24,7 +24,7 @@ module.exports = async (name, currentDir) => {
 		// writing content to package.json for tailwind
 		const tlwPkgJSON = { ...packageJSON };
 		tlwPkgJSON.name = name;
-		jsonFile.writeFile(`${tailwindPaths.pkgJSON}`, tlwPkgJSON, err => {});
+		await writeJsonFile(`${tailwindPaths.pkgJSON}`, tlwPkgJSON)
 
 		// copying tailwind config files
 		execa('cp', [`${tailwindPaths.postCSSConfig}`, `${path}`]);

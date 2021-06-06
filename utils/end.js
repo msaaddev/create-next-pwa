@@ -45,7 +45,7 @@ module.exports = async (name, isTailwind = false) => {
 			logSymbols.info,
 			chalk.bgGreen.hex(`#000000`).bold(` Next.js PWA `),
 			`with ${chalk.bgGreen.hex(`#000000`).bold(` Tailwind `)}`,
-			'created successfully'
+			'created successfully.'
 		);
 	}
 

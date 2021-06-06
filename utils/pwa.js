@@ -1,6 +1,5 @@
 const ora = require('ora');
 const execa = require('execa');
-const jsonFile = require('jsonfile');
 const { getPath, pwaPath } = require('../functions/path');
 const chalk = require('chalk');
 const manifest = require('../config/pwa/pwa-manifest.json');
@@ -99,42 +98,21 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 
 		// writing data to files
 		if (!isWindows) {
-			jsonFile.writeFile(`${pwaPaths.manifestFile}`, pwaManifest, err => {
-				if (err !== null) {
-					console.log(err);
-				}
-			});
-			jsonFile.writeFile(`${pwaPaths.prettierFile}`, pwaPrettier, err => {
-				if (err !== null) {
-					console.log(err);
-				}
-			});
-			jsonFile.writeFile(`${pwaPaths.writePkgJSON}`, pwaPkgJSON, err => {
-				if (err !== null) {
-					console.log(err);
-				}
-			});
+			try {
+				await writeJsonFile(`${pwaPaths.manifestFile}`, pwaManifest);
+				await writeJsonFile(`${pwaPaths.prettierFile}`, pwaPrettier);
+				await writeJsonFile(`${pwaPaths.writePkgJSON}`, pwaPkgJSON);
+			} catch (err) {
+				handleError(err);
+			}
 		} else {
-			await writeJsonFile(`${pwaPaths.winManifestFile}`, pwaManifest);
-
-			jsonFile.writeFile(
-				`${pwaPaths.winPrettierFile}`,
-				pwaPrettier,
-				err => {
-					if (err !== null) {
-						console.log(err);
-					}
-				}
-			);
-			jsonFile.writeFile(
-				`${pwaPaths.winWritePkgJSON}`,
-				pwaPkgJSON,
-				err => {
-					if (err !== null) {
-						console.log(err);
-					}
-				}
-			);
+			try {
+				await writeJsonFile(`${pwaPaths.winManifestFile}`, pwaManifest);
+				await writeJsonFile(`${pwaPaths.winPrettierFile}`, pwaPrettier);
+				await writeJsonFile(`${pwaPaths.winWritePkgJSON}`, pwaPkgJSON);
+			} catch (err) {
+				handleError(err);
+			}
 		}
 		spinner.succeed(`${chalk.green('metadata files updated.')}`);
 
