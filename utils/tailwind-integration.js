@@ -1,11 +1,11 @@
 const ora = require('ora');
 const execa = require('execa');
-const { exec } = require('child_process');
 const jsonFile = require('jsonfile');
 const { getPath, tailwindPath } = require('../functions/path');
 const chalk = require('chalk');
 const handleError = require('node-cli-handle-error');
 const packageJSON = require('../config/tailwind/tailwind-package.json');
+const changeDir = require('in-folder');
 
 module.exports = async (name, currentDir) => {
 	// get nextjs project path
@@ -77,8 +77,11 @@ module.exports = async (name, currentDir) => {
 			]);
 			await execa(`npm`, [`--prefix`, `${path}`, `run`, `format`]);
 		} else {
-			process.chdir(path);
-			exec(`npm install --only=dev && npm run format`);
+			// change directory
+			changeDir(name, () => process.cwd());
+
+			execa(`npm`, [`install`, `--only=dev`]);
+			execa(`npm`, [`run`, `format`]);
 		}
 
 		// succeed

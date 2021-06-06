@@ -37,6 +37,7 @@
 		"colors": "^1.0.3",
 		"enquirer": "^2.3.6",
 		"execa": "^5.1.0",
+		"in-folder": "^1.0.3",
 		"jsonfile": "^6.1.0",
 		"log-symbols": "^4.1.0",
 		"node-cli-handle-error": "^1.0.0",

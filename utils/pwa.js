@@ -1,6 +1,5 @@
 const ora = require('ora');
 const execa = require('execa');
-const { exec } = require('child_process');
 const jsonFile = require('jsonfile');
 const { getPath, pwaPath } = require('../functions/path');
 const chalk = require('chalk');
@@ -9,6 +8,7 @@ const pwaPrettier = require('../config/pwa/prettier.json');
 const packageJSON = require('../config/pwa/pwa-package.json');
 const handleError = require('node-cli-handle-error');
 const fs = require('fs');
+const changeDir = require('in-folder');
 
 module.exports = async (name, currentDir, isTailwind = false) => {
 	// get nextjs project path
@@ -147,10 +147,13 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 				await execa(`npm`, [`--prefix`, `${path}`, `run`, `format`]);
 			}
 		} else {
-			process.chdir(path);
-			exec(`npm install`);
+			// change directory
+			changeDir(name, () => process.cwd());
+
+			execa(`npm`, [`install`]);
 			if (!isTailwind) {
-				exec(`npm install --only=dev && npm run format`);
+				execa(`npm`, [`install`, `--only=dev`]);
+				execa(`npm`, [`run`, `format`]);
 			}
 		}
 
