@@ -7,6 +7,7 @@ const manifest = require('../config/pwa/pwa-manifest.json');
 const pwaPrettier = require('../config/pwa/prettier.json');
 const packageJSON = require('../config/pwa/pwa-package.json');
 const handleError = require('node-cli-handle-error');
+const fs = require('fs');
 
 module.exports = async (name, currentDir, isTailwind = false) => {
 	// get nextjs project path
@@ -18,26 +19,41 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 	// check whether the OS is windows or not
 	const isWindows = process.platform === 'win32' ? true : false;
 
+	// check if directory exists
+	const filenames = fs.readdirSync(process.cwd());
+	const isGitDir = filenames.indexOf(`.git`) !== -1 ? true : false;
+
 	// spinner
 	const spinner = ora();
 
 	try {
 		// deleting .git directory
-		if (!isWindows) {
-			await execa(`rm`, [`-rf`, `${pwaPaths.gitDir}`]);
-		} else {
-			await execa(`rmdir`, [`/Q`, `/S`, `${pwaPaths.gitDir}`]);
+
+		if (isGitDir) {
+			if (!isWindows) {
+				await execa(`rm`, [`-rf`, `${pwaPaths.gitDir}`]);
+			} else {
+				await execa(`rmdir`, [`/Q`, `/S`, `${pwaPaths.gitDir}`]);
+			}
 		}
 
 		// creating prettier configuration
 		spinner.start(`${chalk.bold.dim('Adding PWA configurations...')}`);
 		execa('touch', [`${pwaPaths.prettierFile}`]);
 
-		// copying logos
-		execa('cp', [`${pwaPaths.logo128x128}`, `${pwaPaths.publicDir}`]);
-		execa('cp', [`${pwaPaths.logo512x512}`, `${pwaPaths.publicDir}`]);
-		execa('cp', [`${pwaPaths.documentFile}`, `${pwaPaths.pagesDir}`]);
-		execa('cp', [`${pwaPaths.nextConfig}`, `${path}`]);
+		if (!isWindows) {
+			// copying logos
+			execa('cp', [`${pwaPaths.logo128x128}`, `${pwaPaths.publicDir}`]);
+			execa('cp', [`${pwaPaths.logo512x512}`, `${pwaPaths.publicDir}`]);
+			execa('cp', [`${pwaPaths.documentFile}`, `${pwaPaths.pagesDir}`]);
+			execa('cp', [`${pwaPaths.nextConfig}`, `${path}`]);
+		} else {
+			// copying logos
+			execa('copy', [`${pwaPaths.logo128x128}`, `${pwaPaths.publicDir}`]);
+			execa('copy', [`${pwaPaths.logo512x512}`, `${pwaPaths.publicDir}`]);
+			execa('copy', [`${pwaPaths.documentFile}`, `${pwaPaths.pagesDir}`]);
+			execa('copy', [`${pwaPaths.nextConfig}`, `${path}`]);
+		}
 
 		spinner.succeed(`${chalk.green('PWA configurations added.')}`);
 
