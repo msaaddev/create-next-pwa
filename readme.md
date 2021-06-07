@@ -89,7 +89,7 @@ create-next-pwa
 
 ## 👨🏻‍💻 Contributing
 
-Make sure you read the [contributing guidelines](https://github.com/msaaddev/create-next-pwa/blob/master/contributing.md) before opening a PR.
+Make sure you read the [contributing guidelines](https://github.com/msaaddev/create-next-pwa/blob/master/contributing.md) before opening a PR. If you want something else to **integrate** with the CLI like I have done with tailwind, open an issue in the repository and I will get back to it.
 
 ## 🔑 License & Conduct
 
