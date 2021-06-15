@@ -21,8 +21,11 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 	const spinner = ora();
 
 	try {
+		// check if .git directory exists
+		const isGitDir = isItGit(path);
+
 		// deleting .git directory
-		if (isItGit) {
+		if (isGitDir) {
 			if (!isWindows) {
 				await execa(`rm`, [`-rf`, `${pwaPaths.gitDir}`]);
 			} else {
