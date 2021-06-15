@@ -1,5 +1,9 @@
 ## Changes Across Different Versions of create-next-pwa
 
+### v3.3.1
+
+- Fixed .git directory deletion
+
 ### v3.2.0
 
 - Removed code reducdancies
