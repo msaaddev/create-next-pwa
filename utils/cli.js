@@ -2,7 +2,7 @@ const ora = require('ora');
 const execa = require('execa');
 const chalk = require('chalk');
 const pwa = require('./pwa');
-const tailwindIntegration = require('./tailwind-integration');
+const tailwind = require('./tailwind');
 const handleError = require('node-cli-handle-error');
 
 module.exports = async (name, flags, currentDir, isTailwind = false) => {
@@ -22,7 +22,7 @@ module.exports = async (name, flags, currentDir, isTailwind = false) => {
 
 		await pwa(name, currentDir, isTailwind);
 
-		isTailwind && (await tailwindIntegration(name, currentDir));
+		isTailwind && (await tailwind(name, currentDir));
 	} catch (err) {
 		spinner.fail(`Couldn't create an app.`);
 		handleError(`Something went wrong.`, err);
