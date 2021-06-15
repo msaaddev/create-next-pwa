@@ -1,6 +1,15 @@
 ## Changes Across Different Versions of create-next-pwa
 
-### 2.5.0 to v3.1.9
+### v3.2.0
+
+- Removed code reducdancies
+- Improved code structure
+- Removed in-folder
+- Added node-async-exec because of its change directory and cross-platform nature
+- Fixed outdating future dependencies bug [#21](https://github.com/msaaddev/create-next-pwa/issues/21)
+- Added custom error message if the project folder already exists
+
+### v2.5.0 to v3.1.9
 
 - Cross platform directory deletion
 - Used copy command for windows to copy files
