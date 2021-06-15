@@ -20,10 +20,10 @@ const end = require('./utils/end');
 
 	// add tailwind configurations
 	if (flags.indexOf('--tailwind') !== -1 || flags.indexOf('-t') !== -1) {
-		await cli(name, flags, currentDir, true);
-		end(name, true);
+		const isEnd = await cli(name, flags, currentDir, true);
+		isEnd && end(name, true);
 	} else {
-		await cli(name, flags, currentDir);
-		await end(name);
+		const isEnd = await cli(name, flags, currentDir);
+		isEnd && (await end(name));
 	}
 })();

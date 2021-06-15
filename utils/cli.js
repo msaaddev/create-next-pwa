@@ -2,8 +2,10 @@ const ora = require('ora');
 const execa = require('execa');
 const chalk = require('chalk');
 const pwa = require('./pwa');
-const tailwindIntegration = require('./tailwind-integration');
+const tailwind = require('./tailwind');
 const handleError = require('node-cli-handle-error');
+const fs = require('fs');
+const logSymbols = require('log-symbols');
 
 module.exports = async (name, flags, currentDir, isTailwind = false) => {
 	const spinner = ora();
@@ -22,9 +24,26 @@ module.exports = async (name, flags, currentDir, isTailwind = false) => {
 
 		await pwa(name, currentDir, isTailwind);
 
-		isTailwind && (await tailwindIntegration(name, currentDir));
+		isTailwind && (await tailwind(name, currentDir));
+		return true;
 	} catch (err) {
 		spinner.fail(`Couldn't create an app.`);
-		handleError(`Something went wrong.`, err);
+
+		// check if directory exists
+		const filenames = fs.readdirSync(process.cwd());
+		const isDirExist = filenames.indexOf(`${name}`) !== -1 ? true : false;
+
+		if (isDirExist) {
+			console.log(
+				`\n${logSymbols.error} ${chalk.bgRed
+					.hex(`#000000`)
+					.bold(
+						` ${name} `
+					)} directory already exists. Try changing the name.\n`
+			);
+		} else {
+			handleError(`Something went wrong.`, err);
+		}
+		return false;
 	}
 };

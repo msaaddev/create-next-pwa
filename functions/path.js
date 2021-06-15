@@ -10,8 +10,8 @@ const getPath = name => {
 	// check whether the OS is windows or not
 	const isWindows = process.platform === 'win32' ? true : false;
 
-	if (isWindows) return `${cwd}${slash}${name}`;
-	return `${cwd}/${name}`;
+	if (isWindows) return { path: `${cwd}${slash}${name}`, isWindows };
+	return { path: `${cwd}/${name}`, isWindows };
 };
 
 /**
@@ -20,7 +20,7 @@ const getPath = name => {
  * @param {currentDir} - path of the directory from where CLI is running
  */
 const pwaPath = (name, currentDir) => {
-	const path = getPath(name);
+	const { path } = getPath(name);
 	const slash = '\\';
 
 	return {
@@ -53,7 +53,7 @@ const pwaPath = (name, currentDir) => {
  * @param {currentDir} - path of the directory from where CLI is running
  */
 const tailwindPath = (name, currentDir) => {
-	const path = getPath(name);
+	const { path } = getPath(name);
 	const slash = '\\';
 
 	return {

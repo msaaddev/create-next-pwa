@@ -1,6 +1,6 @@
 {
 	"name": "create-next-pwa",
-	"version": "3.1.10",
+	"version": "3.2.0",
 	"description": "Set up Next.js Progressive Web App with `npx create-next-pwa`",
 	"repository": "https://github.com/msaaddev/create-next-pwa",
 	"author": {
@@ -28,7 +28,9 @@
 		"progressive web app",
 		"create-next-pwa",
 		"msaaddev",
-		"Saad Irfan"
+		"Saad Irfan",
+		"nextjs progressive web app",
+		"nextjs pwa"
 	],
 	"dependencies": {
 		"chalk": "^2.4.2",
@@ -37,8 +39,9 @@
 		"colors": "^1.0.3",
 		"enquirer": "^2.3.6",
 		"execa": "^5.1.0",
-		"in-folder": "^1.0.3",
+		"is-it-git": "^1.1.0",
 		"log-symbols": "^4.1.0",
+		"node-async-exec": "^1.0.3",
 		"node-cli-handle-error": "^1.0.0",
 		"ora": "^5.4.0",
 		"update-check": "^1.5.4",
