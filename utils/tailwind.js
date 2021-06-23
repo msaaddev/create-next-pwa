@@ -60,7 +60,7 @@ module.exports = async (name, currentDir) => {
 		await { path, cmd: `npm run format` };
 
 		// succeed
-		spinner.succeed(`${chalk.green('Tailwind configurations added.')}`);
+		spinner.succeed(`${chalk.white('Tailwind configurations added.')}`);
 	} catch (err) {
 		spinner.fail(`Couldn't add tailwind configurations.`);
 		handleError(`Something went wrong.`, err);

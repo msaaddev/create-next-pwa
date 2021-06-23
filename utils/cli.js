@@ -20,7 +20,7 @@ module.exports = async (name, flags, currentDir, isTailwind = false) => {
 		await execa(`npx`, [`create-next-app`, `${name}`]);
 
 		// succeed
-		spinner.succeed(`${chalk.green('Next.js App created.')}`);
+		spinner.succeed(`${chalk.white('Next.js App created.')}`);
 
 		await pwa(name, currentDir, isTailwind);
 

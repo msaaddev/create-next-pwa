@@ -51,14 +51,14 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 			// coping config files
 			execa('cp', [`${pwaPaths.documentFile}`, `${pwaPaths.pagesDir}`]);
 			execa('cp', [`${pwaPaths.nextConfig}`, `${path}`]);
-			spinner.succeed(`${chalk.green('PWA configurations added.')}`);
+			spinner.succeed(`${chalk.white('PWA configurations added.')}`);
 
 			// creating manifest.json file
 			spinner.start(`${chalk.bold.dim('Creating manifest.json...')}`);
 
 			execa('touch', [`${pwaPaths.manifestFile}`]);
 
-			spinner.succeed(`${chalk.green('manifest.json created.')}`);
+			spinner.succeed(`${chalk.white('manifest.json created.')}`);
 
 			spinner.start(`${chalk.bold.dim('Updating metadata files...')}`);
 
@@ -89,14 +89,14 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 				`${pwaPaths.winPagesDir}`
 			]);
 			execa('copy', [`${pwaPaths.winNextConfig}`, `${path}`]);
-			spinner.succeed(`${chalk.green('PWA configurations added.')}`);
+			spinner.succeed(`${chalk.white('PWA configurations added.')}`);
 
 			// creating manifest.json file
 			spinner.start(`${chalk.bold.dim('Creating manifest.json...')}`);
 
 			execa('copy', [`NUL`, `${pwaPaths.winManifestFile}`]);
 
-			spinner.succeed(`${chalk.green('manifest.json created.')}`);
+			spinner.succeed(`${chalk.white('manifest.json created.')}`);
 
 			spinner.start(`${chalk.bold.dim('Updating metadata files...')}`);
 
@@ -109,7 +109,7 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 			await writeJsonFile(`${pwaPaths.winWritePkgJSON}`, pwaPkgJSON);
 		}
 
-		spinner.succeed(`${chalk.green('metadata files updated.')}`);
+		spinner.succeed(`${chalk.white('metadata files updated.')}`);
 
 		// installing packages
 		spinner.start(`${chalk.bold.dim('Installing dependencies...')}`);
@@ -120,7 +120,7 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 			await exec({ path, cmd: `npm run format` });
 		}
 
-		spinner.succeed(`${chalk.green('Dependencies installed.')}`);
+		spinner.succeed(`${chalk.white('Dependencies installed.')}`);
 	} catch (err) {
 		spinner.fail(`Couldn't convert Next.js app to PWA.`);
 		handleError(`Something went wrong.`, err);
