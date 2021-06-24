@@ -7,9 +7,9 @@
 </div>
 <br>
 
-A Node.js based CLI tool that creates **Progressive Web App (PWA)** with **Next.js**. You can also integrate **tailwind** with the Next.js PWA using this CLI with a single command.
+A cross-platform Node.js based CLI tool that creates **Progressive Web App (PWA)** with **Next.js**. You can also integrate **tailwind** with the Next.js PWA using this CLI with a single command.
 
->Note: The CLI is currently in beta mode for Windows. But works perfectly well with macOS and linux.
+>Note: If you are on Windows, make sure you either use Command Prompt or Windows Powershell to run the CLI.
 
 ## 🎯 Features
 
