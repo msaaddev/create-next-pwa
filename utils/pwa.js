@@ -28,8 +28,6 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 		if (isGitDir) {
 			if (!isWindows) {
 				await execa(`rm`, [`-rf`, `${pwaPaths.gitDir}`]);
-			} else {
-				await execa(`rmdir`, [`/Q`, `/S`, `${pwaPaths.winGitDir}`]);
 			}
 		}
 
