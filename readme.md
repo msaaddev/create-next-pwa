@@ -91,6 +91,10 @@ create-next-pwa
 
 Make sure you read the [contributing guidelines](https://github.com/msaaddev/create-next-pwa/blob/master/contributing.md) before opening a PR. If you want something else to **integrate** with the CLI like I have done with tailwind, open an issue in the repository and I will get back to it.
 
+## ⚡️ Other Projects
+
+I have curated a [detailed list](https://github.com/msaaddev/open-source) of all the open-source projects I have authored. Do take out a moment and take a look.
+
 ## 🔑 License & Conduct
 
 - MIT © [Saad Irfan](https://github.com/msaaddev)
