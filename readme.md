@@ -4,6 +4,9 @@
 	<img src="https://img.shields.io/npm/v/create-next-pwa?color=%23000000" alt="version">
 	<img src="https://img.shields.io/npm/dt/create-next-pwa?color=%23000000" alt="downloads">
 	<img src="https://img.shields.io/npm/l/create-next-pwa?color=%23000000" alt="license">
+	<a href="https://stars.github.com/">
+		<img src="https://img.shields.io/badge/GitHub%20Star-Nominate%20%40msaaddev-%23000000" alt="nominate @msaaddev for GitHub Star" />
+	</a>
 </div>
 <br>
 
