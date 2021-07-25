@@ -10,7 +10,7 @@ const writeJsonFile = require('write-json-file');
 const isItGit = require('is-it-git');
 const exec = require('node-async-exec');
 
-module.exports = async (name, currentDir, isTailwind = false) => {
+module.exports = async (name, currentDir, isTailwind = false, typescript) => {
 	// get nextjs project path
 	const { path, isWindows } = getPath(name);
 
@@ -47,7 +47,17 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 			execa('cp', [`${pwaPaths.logo512x512}`, `${pwaPaths.publicDir}`]);
 
 			// coping config files
-			execa('cp', [`${pwaPaths.documentFile}`, `${pwaPaths.pagesDir}`]);
+			!typescript &&
+				execa('cp', [
+					`${pwaPaths.documentFile}`,
+					`${pwaPaths.pagesDir}`
+				]);
+			typescript &&
+				execa('cp', [
+					`${pwaPaths.tsDocumentFile}`,
+					`${pwaPaths.pagesDir}`
+				]);
+
 			execa('cp', [`${pwaPaths.nextConfig}`, `${path}`]);
 			spinner.succeed(`${chalk.white('PWA configurations added.')}`);
 
@@ -82,10 +92,17 @@ module.exports = async (name, currentDir, isTailwind = false) => {
 			]);
 
 			// coping config files
-			execa('copy', [
-				`${pwaPaths.winDocumentFile}`,
-				`${pwaPaths.winPagesDir}`
-			]);
+			!typescript &&
+				execa('copy', [
+					`${pwaPaths.winDocumentFile}`,
+					`${pwaPaths.winPagesDir}`
+				]);
+
+			typescript &&
+				execa('copy', [
+					`${pwaPaths.winTsDocumentFile}`,
+					`${pwaPaths.winPagesDir}`
+				]);
 			execa('copy', [`${pwaPaths.winNextConfig}`, `${path}`]);
 			spinner.succeed(`${chalk.white('PWA configurations added.')}`);
 
