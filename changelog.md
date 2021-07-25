@@ -1,10 +1,6 @@
 ## Changes Across Different Versions of create-next-pwa
 
-### v3.4.1
-
-- Improved readme
-
-### v3.4.0
+### v3.4.3
 
 - TypeScript Support [(#27)](https://github.com/msaaddev/create-next-pwa/pull/27) with `--typescript` flag
 - Help Section that can be accessed using `--help``
