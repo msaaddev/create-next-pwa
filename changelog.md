@@ -1,5 +1,11 @@
 ## Changes Across Different Versions of create-next-pwa
 
+### v3.4.0
+
+- TypeScript Support [(#27)](https://github.com/msaaddev/create-next-pwa/pull/27) with `--typescript` flag
+- Help Section that can be accessed using `--help``
+- Improved documentation
+
 ### v3.3.1
 
 - Fixed .git directory deletion
