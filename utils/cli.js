@@ -17,7 +17,12 @@ module.exports = async (name, flags, currentDir, isTailwind = false) => {
 
 	try {
 		// creating a Next.js app
-		await execa(`npx`, [`create-next-app@latest`, `${name}`]);
+			// verify if typescript option is selected
+			if (flags.indexOf('--ts') !== -1 || flags.indexOf('--typescript') !== -1) {
+				await execa(`npx`, [`create-next-app@latest`, `${name}`, `--typescript`]);
+			} else {
+				await execa(`npx`, [`create-next-app@latest`, `${name}`]);
+			}
 
 		// succeed
 		spinner.succeed(`${chalk.white('Next.js App created.')}`);

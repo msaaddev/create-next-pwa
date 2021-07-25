@@ -41,6 +41,9 @@ npx create-next-pwa@latest [app_name]
 # if you have installed globally
 create-next-pwa [app_name]
 
+# to use Next.js with Typescript
+create-next-pwa [app_name] --typescript
+
 # Next.js PWA with tailwind integration using npx
 npx create-next-pwa@latest [app_name] --tailwind
 
