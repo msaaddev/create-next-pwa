@@ -7,7 +7,13 @@ const handleError = require('node-cli-handle-error');
 const fs = require('fs');
 const logSymbols = require('log-symbols');
 
-module.exports = async (name, flags, currentDir, isTailwind = false) => {
+module.exports = async (
+	name,
+	flags,
+	currentDir,
+	typescript,
+	isTailwind = false
+) => {
 	const spinner = ora();
 
 	if (flags.length === 0) {
@@ -17,19 +23,22 @@ module.exports = async (name, flags, currentDir, isTailwind = false) => {
 
 	try {
 		// creating a Next.js app
-			// verify if typescript option is selected
-			if (flags.indexOf('--ts') !== -1 || flags.indexOf('--typescript') !== -1) {
-				await execa(`npx`, [`create-next-app@latest`, `${name}`, `--typescript`]);
-			} else {
-				await execa(`npx`, [`create-next-app@latest`, `${name}`]);
-			}
+		if (typescript) {
+			await execa(`npx`, [
+				`create-next-app@latest`,
+				`${name}`,
+				`--typescript`
+			]);
+		} else {
+			await execa(`npx`, [`create-next-app@latest`, `${name}`]);
+		}
 
 		// succeed
 		spinner.succeed(`${chalk.white('Next.js App created.')}`);
 
-		await pwa(name, currentDir, isTailwind);
+		await pwa(name, currentDir, isTailwind, typescript);
 
-		isTailwind && (await tailwind(name, currentDir));
+		isTailwind && (await tailwind(name, currentDir, typescript));
 		return true;
 	} catch (err) {
 		spinner.fail(`Couldn't create an app.`);
