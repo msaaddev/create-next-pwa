@@ -70,6 +70,8 @@ create-next-pwa
 create-next-pwa --tailwind
 ```
 
+![help](assets/help.png)
+
 ## 🎩 Demo
 
 ```sh
