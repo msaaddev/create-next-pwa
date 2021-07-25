@@ -18,12 +18,24 @@ const end = require('./utils/end');
 	const name = await init(flags);
 	const currentDir = __dirname;
 
+	// check if the project is typescript
+	const typescript =
+		flags.indexOf('-ts') !== -1 || flags.indexOf('--typescript') !== -1
+			? true
+			: false;
+
+	// check if the project needs tailwind
+	const tailwind =
+		flags.indexOf('--tailwind') !== -1 || flags.indexOf('-t') !== -1
+			? true
+			: false;
+
 	// add tailwind configurations
-	if (flags.indexOf('--tailwind') !== -1 || flags.indexOf('-t') !== -1) {
-		const isEnd = await cli(name, flags, currentDir, true);
-		isEnd && end(name, true);
+	if (tailwind) {
+		const isEnd = await cli(name, flags, currentDir, typescript, tailwind);
+		isEnd && end(name, typescript, tailwind);
 	} else {
-		const isEnd = await cli(name, flags, currentDir);
-		isEnd && (await end(name));
+		const isEnd = await cli(name, flags, currentDir, typescript);
+		isEnd && (await end(name, typescript));
 	}
 })();
