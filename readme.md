@@ -10,15 +10,22 @@
 </div>
 <br>
 
-A cross-platform Node.js based CLI tool that creates **Progressive Web App (PWA)** with **Next.js**. You can also integrate **tailwind** with the Next.js PWA using this CLI with a single command.
+<div align="center">
 
->Note: If you are on Windows, make sure you either use Command Prompt or Windows Powershell to run the CLI.
+<strong>A cross-platform Node.js based CLI tool that creates Progressive Web App (PWA) with Next.js. You can also integrate tailwind with the Next.js PWA using this CLI with a single command.</strong>
 
-## 🎯 Features
+</div>
 
-- Generates boilerplate code for **Next.js PWA** with a single command
-- **Tailwind** integration with the Next.js PWA
-- Integrated **Prettier** to easily format the code with `npm run format`
+![separator](assets/separate.jpeg)
+
+- **Simple**: One command Next.js Progressive Web App setup
+- **Cross-platform**: Works on all available operating systems including Linux, macOS, and Windows
+- **Support**: Also supports TypeScript Next.js PWA with `--typescript` flag
+- **Tailwind**: Instantly integrate Tailwind using `--tailwind` flag in your Next.js PWA.
+- **Prettier**: Integrated Prettier to easily format the code with `npm run format`
+- **MIT Licensed**: Free to use for personal and commercial use.
+
+>Note: If you are on Windows, make sure to either use Command Prompt or Windows Powershell to run the CLI.
 
 ## 📦 Installation
 
