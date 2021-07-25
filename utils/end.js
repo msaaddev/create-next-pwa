@@ -31,19 +31,21 @@ const notifyUpdate = async () => {
 	}
 };
 
-module.exports = async (name, isTailwind = false) => {
+module.exports = async (name, typescript, isTailwind = false) => {
 	console.log('');
+	let msg = ``;
+	typescript ? (msg = `TypeScript `) : null;
 
 	if (!isTailwind) {
 		console.log(
 			logSymbols.info,
-			chalk.bgGreen.hex(`#000000`).bold(` Next.js PWA `),
+			chalk.bgGreen.hex(`#000000`).bold(` Next.js ${msg}PWA `),
 			'created successfully'
 		);
 	} else {
 		console.log(
 			logSymbols.info,
-			chalk.bgGreen.hex(`#000000`).bold(` Next.js PWA `),
+			chalk.bgGreen.hex(`#000000`).bold(` Next.js ${msg}PWA `),
 			`with ${chalk.bgGreen.hex(`#000000`).bold(` Tailwind `)}`,
 			'created successfully.'
 		);
